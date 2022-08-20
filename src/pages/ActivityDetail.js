@@ -377,108 +377,110 @@ export default function ActivityDetail() {
     settodoArray([...dataBelum, ...dataSudah]);
   };
   return (
-    <section className="activity-detail">
+    <>
       <Header />
-      <div className="container">
-        <div className="subjudul d-flex justify-content-between align-items-center mb-5">
-          <div className="judul-activity d-flex align-items-center">
-            <Button type="link" href="/" className="btn p-0 me-3 border-0" data-cy="todo-back-button">
-              <img src={BackIcon} alt="" />
-            </Button>
-            <div className="form-update">
-              {isLoadingActivity === true ? (
-                <span className="lds-dual-ring cyan"></span>
-              ) : (
-                <>
-                  <p className={`p-0 m-0 ${isActive === "form" ? "d-none" : ""}`} data-cy="todo-title">
-                    {valueName}
-                  </p>
-                  <input className={`${isActive === "form" ? "" : "d-none"} name-activity`} type="text" defaultValue={valueName} onChange={(e) => setValueName(e.target.value)} onBlur={hiddenForm} />
-                </>
-              )}
-            </div>
+      <div className="activity-detail">
+        <div className="container">
+          <div className="subjudul d-flex justify-content-between align-items-center mb-5">
+            <div className="judul-activity d-flex align-items-center">
+              <Button type="link" href="/" className="btn p-0 me-3 border-0" data-cy="todo-back-button">
+                <img src={BackIcon} alt="" />
+              </Button>
+              <div className="form-update">
+                {isLoadingActivity === true ? (
+                  <span className="lds-dual-ring cyan"></span>
+                ) : (
+                  <>
+                    <p className={`p-0 m-0 ${isActive === "form" ? "d-none" : ""}`} data-cy="todo-title">
+                      {valueName}
+                    </p>
+                    <input className={`${isActive === "form" ? "" : "d-none"} name-activity`} type="text" defaultValue={valueName} onChange={(e) => setValueName(e.target.value)} onBlur={hiddenForm} />
+                  </>
+                )}
+              </div>
 
-            <Button className="btn p-0 ms-2 border-0 pencil-update" onClick={updateNewJudul} data-cy="todo-title-edit-button">
-              <img src={PencilIcon} alt="" />
-            </Button>
-          </div>
-          <div className="position-relative">
-            <Button className="btn p-0 me-3 border-0" onClick={handleShowFilter} data-cy="todo-sort-button">
-              <img src={UrutkanIcon} alt="" />
-            </Button>
-            <div className={`filter-container d-flex flex-column align-items-start ${showFilter}`}>
-              <button className="btn p-0 me-3 border-0 active" onClick={sortByTerbaru} data-cy="sort-selection">
-                <img src="/icon/terbaru.png" alt="" />
-                <span>Terbaru</span>
-              </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByTerlama} data-cy="sort-selection">
-                <img src="/icon/terlama.png" alt="" />
-                <span>Terlama</span>
-              </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByAZ} data-cy="sort-selection">
-                <img src="/icon/a-z.png" alt="" />
-                <span>A-Z</span>
-              </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByZA} data-cy="sort-selection">
-                <img src="/icon/z-a.png" alt="" />
-                <span>Z-A</span>
-              </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByNotYet} data-cy="sort-selection">
-                <img src="/icon/notyet.png" alt="" />
-                <span>Belum Selesai</span>
-              </button>
-            </div>
-            <button className="rounded-pill btn-cyan" onClick={handleShowNotif} data-cy="todo-add-button">
-              + Tambah
-            </button>
-          </div>
-        </div>
-        {checkTodoArray()}
-        <ModalElement show={show} data-cy="modal-add" size="lg" funcModal={handleCloseNotif} heading="Ubah List Item" isHeader isFooter isSpinner={isSpinner} funcSave={createToDo}>
-          <label htmlFor="add-todo" className="fw-bold mb-2">
-            NAMA LIST ITEM
-          </label>
-          <input type="text" id="add-todo" className="form-control py-3 px-4 mb-4 shadow-none" placeholder="Tambahkan nama list item" defaultValue={nameToDo} onChange={(e) => setNameToDo(e.target.value)} />
-          <label className="fw-bold mb-2">PRIORITY</label>
-          <Select
-            options={options}
-            defaultValue={selectedOption.value}
-            onChange={setSelectedOption}
-            className="container-select mb-3"
-            classNamePrefix="react-select__control "
-            placeholder={divCircleColorOption(selectedOption.value, "", true)}
-          />
-        </ModalElement>
-        <ModalElement show={show2} size="md" data-cy="modal-delete">
-          <div className="text-center p-4">
-            <img src={WarningIcon} alt="" className="mb-5" data-cy="modal-delete-icon" />
-            <p className="fs-5 mb-5" data-cy="modal-delete-title">
-              Apakah kamu yakin akan menghapus List Item <strong>"{nameToDo}"</strong>?
-            </p>
-            <div className="d-flex justify-content-center">
-              <Button isPrimary isGray className="rounded-pill me-3" onClick={handleCloseNotif2} data-cy="modal-delete-cancel-button">
-                Batal
-              </Button>
-              <Button isPrimary isRed className="rounded-pill" onClick={deleteToDo} data-cy="modal-delete-confirm-button">
-                <span>Hapus</span>
-                {isSpinnerDelete === true ? <span className="lds-dual-ring"></span> : ""}
+              <Button className="btn p-0 ms-2 border-0 pencil-update" onClick={updateNewJudul} data-cy="todo-title-edit-button">
+                <img src={PencilIcon} alt="" />
               </Button>
             </div>
-          </div>
-        </ModalElement>
-        <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish} data-cy="modal-information">
-          <div className="row px-4 align-items-center">
-            <div className="col-auto">
-              <img src={AlertIcon} alt="" data-cy="modal-information-icon" />
+            <div className="position-relative">
+              <Button className="btn p-0 me-3 border-0" onClick={handleShowFilter} data-cy="todo-sort-button">
+                <img src={UrutkanIcon} alt="" />
+              </Button>
+              <div className={`filter-container d-flex flex-column align-items-start ${showFilter}`}>
+                <button className="btn p-0 me-3 border-0 active" onClick={sortByTerbaru} data-cy="sort-selection">
+                  <img src="/icon/terbaru.png" alt="" />
+                  <span>Terbaru</span>
+                </button>
+                <button className="btn p-0 me-3 border-0 " onClick={sortByTerlama} data-cy="sort-selection">
+                  <img src="/icon/terlama.png" alt="" />
+                  <span>Terlama</span>
+                </button>
+                <button className="btn p-0 me-3 border-0 " onClick={sortByAZ} data-cy="sort-selection">
+                  <img src="/icon/a-z.png" alt="" />
+                  <span>A-Z</span>
+                </button>
+                <button className="btn p-0 me-3 border-0 " onClick={sortByZA} data-cy="sort-selection">
+                  <img src="/icon/z-a.png" alt="" />
+                  <span>Z-A</span>
+                </button>
+                <button className="btn p-0 me-3 border-0 " onClick={sortByNotYet} data-cy="sort-selection">
+                  <img src="/icon/notyet.png" alt="" />
+                  <span>Belum Selesai</span>
+                </button>
+              </div>
+              <button className="rounded-pill btn-cyan" onClick={handleShowNotif} data-cy="todo-add-button">
+                + Tambah
+              </button>
             </div>
-            <div className="col">
-              <p className="fs-5 m-0" data-cy="modal-information-title">
-                Item telah terhapus
+          </div>
+          {checkTodoArray()}
+          <ModalElement show={show} data-cy="modal-add" size="lg" funcModal={handleCloseNotif} heading="Ubah List Item" isHeader isFooter isSpinner={isSpinner} funcSave={createToDo}>
+            <label htmlFor="add-todo" className="fw-bold mb-2">
+              NAMA LIST ITEM
+            </label>
+            <input type="text" id="add-todo" className="form-control py-3 px-4 mb-4 shadow-none" placeholder="Tambahkan nama list item" defaultValue={nameToDo} onChange={(e) => setNameToDo(e.target.value)} />
+            <label className="fw-bold mb-2">PRIORITY</label>
+            <Select
+              options={options}
+              defaultValue={selectedOption.value}
+              onChange={setSelectedOption}
+              className="container-select mb-3"
+              classNamePrefix="react-select__control "
+              placeholder={divCircleColorOption(selectedOption.value, "", true)}
+            />
+          </ModalElement>
+          <ModalElement show={show2} size="md" data-cy="modal-delete">
+            <div className="text-center p-4">
+              <img src={WarningIcon} alt="" className="mb-5" data-cy="modal-delete-icon" />
+              <p className="fs-5 mb-5" data-cy="modal-delete-title">
+                Apakah kamu yakin akan menghapus List Item <strong>"{nameToDo}"</strong>?
               </p>
+              <div className="d-flex justify-content-center">
+                <Button isPrimary isGray className="rounded-pill me-3" onClick={handleCloseNotif2} data-cy="modal-delete-cancel-button">
+                  Batal
+                </Button>
+                <Button isPrimary isRed className="rounded-pill" onClick={deleteToDo} data-cy="modal-delete-confirm-button">
+                  <span>Hapus</span>
+                  {isSpinnerDelete === true ? <span className="lds-dual-ring"></span> : ""}
+                </Button>
+              </div>
             </div>
-          </div>
-        </ModalElement>
+          </ModalElement>
+          <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish} data-cy="modal-information">
+            <div className="row px-4 align-items-center">
+              <div className="col-auto">
+                <img src={AlertIcon} alt="" data-cy="modal-information-icon" />
+              </div>
+              <div className="col">
+                <p className="fs-5 m-0" data-cy="modal-information-title">
+                  Item telah terhapus
+                </p>
+              </div>
+            </div>
+          </ModalElement>
+        </div>
       </div>
-    </section>
+    </>
   );
 }

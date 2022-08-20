@@ -111,57 +111,59 @@ export default function LandingPage() {
     });
   };
   return (
-    <section className="landingpage">
+    <>
       <Header />
-      <div className="container">
-        <div className="subjudul d-flex justify-content-between align-items-center">
-          <p data-cy="activity-title">Activity</p>
-          <Button data-cy="activity-add-button" isPrimary className="rounded-pill d-inline-flex align-items-center" onClick={addActivity}>
-            <span>+ Tambah</span>
-            {isSpinner === true ? <span className="lds-dual-ring"></span> : ""}
-          </Button>
-        </div>
-        {isLoading === true ? (
-          <div className="lds-ring">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+      <div className="landingpage">
+        <div className="container">
+          <div className="subjudul d-flex justify-content-between align-items-center">
+            <p data-cy="activity-title">Activity</p>
+            <Button data-cy="activity-add-button" isPrimary className="rounded-pill d-inline-flex align-items-center" onClick={addActivity}>
+              <span>+ Tambah</span>
+              {isSpinner === true ? <span className="lds-dual-ring"></span> : ""}
+            </Button>
           </div>
-        ) : (
-          <div className={`${activityArray?.length > 0 ? "container-grid" : ""} hero `}>{checkActivityArray()}</div>
-        )}
-      </div>
+          {isLoading === true ? (
+            <div className="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : (
+            <div className={`${activityArray?.length > 0 ? "container-grid" : ""} hero `}>{checkActivityArray()}</div>
+          )}
+        </div>
 
-      <ModalElement show={show} size="md" data-cy="modal-delete">
-        <div className="text-center p-4">
-          <img src={WarningIcon} alt="" className="mb-5" data-cy="modal-delete-icon" />
-          <p className="fs-5 mb-5" data-cy="modal-delete-title">
-            Apakah anda yakin menghapus Activity <strong>"{nameActivity}"</strong> ?
-          </p>
-          <div className="d-flex justify-content-center">
-            <Button isPrimary isGray className="rounded-pill me-3" onClick={handleClose} data-cy="modal-delete-cancel-button">
-              Batal
-            </Button>
-            <Button isPrimary isRed className="rounded-pill d-inline-flex align-items-center" onClick={deleteActivity} data-cy="modal-delete-confirm-button">
-              <span>Hapus</span>
-              {isSpinnerDelete === true ? <span className="lds-dual-ring"></span> : ""}
-            </Button>
-          </div>
-        </div>
-      </ModalElement>
-      <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish} data-cy="modal-information">
-        <div className="row px-4 align-items-center">
-          <div className="col-auto">
-            <img src={AlertIcon} alt="" data-cy="modal-information-icon" />
-          </div>
-          <div className="col">
-            <p className="fs-5 m-0" data-cy="modal-information-title">
-              Item telah terhapus
+        <ModalElement show={show} size="md" data-cy="modal-delete">
+          <div className="text-center p-4">
+            <img src={WarningIcon} alt="" className="mb-5" data-cy="modal-delete-icon" />
+            <p className="fs-5 mb-5" data-cy="modal-delete-title">
+              Apakah anda yakin menghapus Activity <strong>"{nameActivity}"</strong> ?
             </p>
+            <div className="d-flex justify-content-center">
+              <Button isPrimary isGray className="rounded-pill me-3" onClick={handleClose} data-cy="modal-delete-cancel-button">
+                Batal
+              </Button>
+              <Button isPrimary isRed className="rounded-pill d-inline-flex align-items-center" onClick={deleteActivity} data-cy="modal-delete-confirm-button">
+                <span>Hapus</span>
+                {isSpinnerDelete === true ? <span className="lds-dual-ring"></span> : ""}
+              </Button>
+            </div>
           </div>
-        </div>
-      </ModalElement>
-    </section>
+        </ModalElement>
+        <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish} data-cy="modal-information">
+          <div className="row px-4 align-items-center">
+            <div className="col-auto">
+              <img src={AlertIcon} alt="" data-cy="modal-information-icon" />
+            </div>
+            <div className="col">
+              <p className="fs-5 m-0" data-cy="modal-information-title">
+                Item telah terhapus
+              </p>
+            </div>
+          </div>
+        </ModalElement>
+      </div>
+    </>
   );
 }
