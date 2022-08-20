@@ -1,0 +1,41 @@
+@import "../../assets/scss/colorVariabel.scss";
+
+.btn-primary-saika {
+  &.btn-danger {
+    background-color: $red;
+    &:hover {
+      background-color: rgba($red, 0.8) !important;
+    }
+  }
+  &.btn-secondary {
+    background-color: $gray-300;
+    &:hover {
+      background-color: rgba($gray-300, 0.8) !important;
+    }
+  }
+  background-color: $blue-white;
+  color: $white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 13px 30px;
+  border: none;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+  &.active {
+    background-color: rgba($blue-white, 0.4) !important;
+    color: $gray-800;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  &:hover {
+    background-color: rgba($blue-white, 0.8) !important;
+  }
+
+  @media (min-width: 768px) {
+    padding: 13px 50px;
+    font-size: 18px;
+  }
+}

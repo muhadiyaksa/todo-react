@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "./colorVariabel.scss";
+
+.container {
+  max-width: 1000px;
+  padding: 38px 20px;
+  @media (min-width: 992px) {
+    padding: 38px 0px;
+  }
+}
+
+.header {
+  font-family: "Poppins", sans-serif;
+  background-color: $blue-white;
+  font-size: 24px;
+}
+button {
+  position: relative;
+  &::after {
+    content: "";
+    inset: 0;
+    position: absolute;
+    display: block;
+  }
+}
+@mixin subjudulStyle {
+  p {
+    font-size: 24px;
+    font-weight: 600;
+
+    @media (min-width: 768px) {
+      font-size: 36px;
+      font-weight: 700;
+    }
+  }
+}
+.landingpage {
+  font-family: "Poppins", sans-serif;
+  color: $gray-900;
+  .subjudul {
+    @include subjudulStyle();
+  }
+  .hero {
+    .judul-activity {
+      color: $gray-800;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .waktu-activity {
+      color: $gray-600;
+      font-weight: 500;
+    }
+  }
+}
+
+.activity-detail {
+  font-family: "Poppins", sans-serif;
+  color: $gray-900;
+  position: relative;
+  .subjudul {
+    @include subjudulStyle();
+  }
+  .form-update {
+    input {
+      border: 0px;
+      border-bottom: 1px solid $gray-800;
+      font-size: 36px;
+      font-weight: 700;
+      outline: none;
+      box-shadow: none;
+      &.todo-input {
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+  }
+  .todo-activity {
+    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-bottom: 20px;
+  }
+  .filter-container {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 230px;
+    border-radius: 10px;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    button {
+      text-align: start;
+      font-size: 18px;
+      padding: 15px 20px !important;
+      width: 100%;
+      border-bottom: 1px solid $gray-300 !important;
+      transition: 0.3s;
+      &.active::after {
+        content: "";
+        position: absolute;
+        background-image: url("../icon/ceklis.png");
+        right: 10%;
+        top: 0;
+        background-repeat: no-repeat;
+        background-position: right;
+      }
+      img {
+        min-height: 20px;
+        margin-right: 10px;
+      }
+      &:hover {
+        background-color: rgba($gray-200, 0.3);
+      }
+    }
+  }
+}
+
+.circle {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  margin-right: 22px;
+  &.red {
+    background-color: $red;
+  }
+  &.orange {
+    background-color: $orange;
+  }
+  &.green {
+    background-color: $green;
+  }
+  &.blue {
+    background-color: $blue-white;
+  }
+  &.purple {
+    background-color: $purple;
+  }
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: $cyan transparent transparent transparent;
+    &:nth-child(1) {
+      animation-delay: -0.45s;
+    }
+    &:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    &:nth-child(3) {
+      animation-delay: -0.15s;
+    }
+  }
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  &.cyan {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    &::after {
+      width: 30px;
+      height: 30px;
+      border-color: $gray-800 transparent #fff transparent;
+    }
+  }
+  &::after {
+    content: " ";
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-cyan {
+  background-color: $blue-white;
+  color: $white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 13px 30px;
+  border: none;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+
+  &:hover {
+    background-color: rgba($blue-white, 0.8) !important;
+  }
+
+  @media (min-width: 768px) {
+    padding: 13px 50px;
+    font-size: 18px;
+  }
+}

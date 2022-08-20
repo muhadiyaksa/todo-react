@@ -1,0 +1,18 @@
+@import "../../assets/scss/colorVariabel.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+.modal {
+  font-family: "Poppins", sans-serif;
+  color: $gray-900;
+
+  .__control {
+    padding: 5px 0px;
+  }
+  .container-select {
+    width: 100%;
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+  }
+}
