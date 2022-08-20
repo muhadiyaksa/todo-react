@@ -47,7 +47,6 @@ export default function LandingPage() {
   const formatTanggal = (param) => {
     const format = new Intl.DateTimeFormat("id-ID", { month: "long" }).format;
     const nameMonth = [...Array(12).keys()].map((m) => format(new Date(Date.UTC(2022, m))));
-    console.log(param);
     let data = parseInt(param.split("-")[1]);
 
     return `${param.split("-")[2]} ${nameMonth[data - 1]} ${param.split("-")[0]}`;
@@ -55,15 +54,17 @@ export default function LandingPage() {
 
   const checkActivityArray = () => {
     if (activityArray?.length > 0) {
-      let result = activityArray.map((el) => {
+      let result = activityArray.map((el, i) => {
         return (
-          <div class="item row-1 column-3 d-flex flex-column justify-content-between">
-            <Button className="judul-activity btn p-0 w-100 h-100 border-0 shadow-none d-inline-flex" type="link" href={`detail/${el.id}`}>
+          <div className="item row-1 column-3 d-flex flex-column justify-content-between" data-cy="activity-item" key={`item-card-${i}`}>
+            <Button className="judul-activity btn p-0 w-100 h-100 border-0 shadow-none d-inline-flex" data-cy="activity-item-title" type="link" href={`detail/${el.id}`}>
               {el.title}
             </Button>
-            <div class="d-flex justify-content-between">
-              <span className="waktu-activity">{formatTanggal(el.updated_at.split("T")[0])}</span>
-              <button className="btn p-0 shadow-none border-0" id={el.id} title={el.title} onClick={handleShow}>
+            <div className="d-flex justify-content-between">
+              <span className="waktu-activity" data-cy="activity-item-date">
+                {formatTanggal(el.updated_at.split("T")[0])}
+              </span>
+              <button className="btn p-0 shadow-none border-0" data-cy="activity-item-delete-button" id={el.id} title={el.title} onClick={handleShow}>
                 <img src={TrashIcon} alt="trash" />
               </button>
             </div>
@@ -73,7 +74,7 @@ export default function LandingPage() {
       return result;
     } else {
       return (
-        <div class="text-center">
+        <div className="text-center">
           <img src={ImgHero} alt="Hero Image" className="img-fluid mt-5" />
         </div>
       );
@@ -112,50 +113,52 @@ export default function LandingPage() {
   return (
     <section className="landingpage">
       <Header />
-      <div class="container">
-        <div class="subjudul d-flex justify-content-between align-items-center">
-          <p>Activity</p>
-          <Button isPrimary className="rounded-pill d-inline-flex align-items-center" onClick={addActivity}>
+      <div className="container">
+        <div className="subjudul d-flex justify-content-between align-items-center">
+          <p data-cy="activity-title">Activity</p>
+          <Button data-cy="activity-add-button" isPrimary className="rounded-pill d-inline-flex align-items-center" onClick={addActivity}>
             <span>+ Tambah</span>
-            {isSpinner === true ? <span class="lds-dual-ring"></span> : ""}
+            {isSpinner === true ? <span className="lds-dual-ring"></span> : ""}
           </Button>
         </div>
         {isLoading === true ? (
-          <div class="lds-ring">
+          <div className="lds-ring">
             <div></div>
             <div></div>
             <div></div>
             <div></div>
           </div>
         ) : (
-          <div class={`${activityArray?.length > 0 ? "container-grid" : ""} hero `}>{checkActivityArray()}</div>
+          <div className={`${activityArray?.length > 0 ? "container-grid" : ""} hero `}>{checkActivityArray()}</div>
         )}
       </div>
 
-      <ModalElement show={show} size="md">
-        <div class="text-center p-4">
-          <img src={WarningIcon} alt="" className="mb-5" />
-          <p className="fs-5 mb-5">
+      <ModalElement show={show} size="md" data-cy="modal-delete">
+        <div className="text-center p-4">
+          <img src={WarningIcon} alt="" className="mb-5" data-cy="modal-delete-icon" />
+          <p className="fs-5 mb-5" data-cy="modal-delete-title">
             Apakah anda yakin menghapus Activity <strong>"{nameActivity}"</strong> ?
           </p>
-          <div class="d-flex justify-content-center">
-            <Button isPrimary isGray className="rounded-pill me-3" onClick={handleClose}>
+          <div className="d-flex justify-content-center">
+            <Button isPrimary isGray className="rounded-pill me-3" onClick={handleClose} data-cy="modal-delete-cancel-button">
               Batal
             </Button>
-            <Button isPrimary isRed className="rounded-pill d-inline-flex align-items-center" onClick={deleteActivity}>
+            <Button isPrimary isRed className="rounded-pill d-inline-flex align-items-center" onClick={deleteActivity} data-cy="modal-delete-confirm-button">
               <span>Hapus</span>
-              {isSpinnerDelete === true ? <span class="lds-dual-ring"></span> : ""}
+              {isSpinnerDelete === true ? <span className="lds-dual-ring"></span> : ""}
             </Button>
           </div>
         </div>
       </ModalElement>
-      <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish}>
-        <div class="row px-4 align-items-center">
-          <div class="col-auto">
-            <img src={AlertIcon} alt="" />
+      <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish} data-cy="modal-information">
+        <div className="row px-4 align-items-center">
+          <div className="col-auto">
+            <img src={AlertIcon} alt="" data-cy="modal-information-icon" />
           </div>
-          <div class="col">
-            <p className="fs-5 m-0">Item telah terhapus</p>
+          <div className="col">
+            <p className="fs-5 m-0" data-cy="modal-information-title">
+              Item telah terhapus
+            </p>
           </div>
         </div>
       </ModalElement>

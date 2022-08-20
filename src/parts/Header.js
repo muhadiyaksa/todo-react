@@ -3,8 +3,10 @@ import React from "react";
 export default function Header() {
   return (
     <div className="header">
-      <div class="container">
-        <h3 className="fw-bold text-light">TO DO LIST APP</h3>
+      <div data-cy="header-background" className="container">
+        <h3 data-cy="header-title" className="fw-bold text-light">
+          TO DO LIST APP
+        </h3>
       </div>
     </div>
   );

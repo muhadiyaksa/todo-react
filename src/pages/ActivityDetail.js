@@ -40,35 +40,35 @@ export default function ActivityDetail() {
   const divCircleColorOption = (param, kondisi, kondisi2) => {
     if (param === "very-high") {
       return (
-        <div class={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`}>
+        <div className={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`} data-cy="todo-item-priority-indicator">
           <span className="circle red"></span>
           <span className={kondisi}>Very High</span>
         </div>
       );
     } else if (param === "high") {
       return (
-        <div class={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`}>
+        <div className={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`} data-cy="todo-item-priority-indicator">
           <span className="circle orange"></span>
           <span className={kondisi}>High</span>
         </div>
       );
     } else if (param === "normal") {
       return (
-        <div class={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`}>
+        <div className={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`} data-cy="todo-item-priority-indicator">
           <span className="circle green"></span>
           <span className={kondisi}>Medium</span>
         </div>
       );
     } else if (param === "low") {
       return (
-        <div class={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`}>
+        <div className={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`} data-cy="todo-item-priority-indicator">
           <span className="circle blue"></span>
           <span className={kondisi}>Low</span>
         </div>
       );
     } else if (param === "very-low") {
       return (
-        <div class={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`}>
+        <div className={`d-flex ${kondisi2 === true ? "px-3 py-2" : ""} align-items-center`} data-cy="todo-item-priority-indicator">
           <span className="circle purple"></span>
           <span className={kondisi}>Very Low</span>
         </div>
@@ -216,19 +216,29 @@ export default function ActivityDetail() {
     if (isLoadingToDo === false) {
       if (todoArray.length > 0) {
         // let data = todoArrayFilter.length < 1 ? [...todoArray] : [...todoArrayFilter];
-        let result = todoArray.map((el) => {
+        let result = todoArray.map((el, i) => {
           return (
-            <div class="todo-activity">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="todo-detail d-flex align-items-center">
-                  <input type="checkbox" className="form-check-input fs-4 me-4 m-0 shadow-none" idtodo={el.id} defaultValue={nameToDo} onChange={updateActiveTodo} checked={parseInt(el.is_active) === 1 ? false : true} />
+            <div className="todo-activity" data-cy="todo-item" key={`todo-item-${i}`}>
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="todo-detail d-flex align-items-center">
+                  <input
+                    type="checkbox"
+                    className="form-check-input fs-4 me-4 m-0 shadow-none"
+                    idtodo={el.id}
+                    defaultValue={nameToDo}
+                    onChange={updateActiveTodo}
+                    checked={parseInt(el.is_active) === 1 ? false : true}
+                    data-cy="todo-item-checkbox"
+                  />
                   {divCircleColorOption(el.priority, "d-none", false)}
-                  <p className={`p-0 m-0 me-3 ${parseInt(el.is_active) === 1 ? "" : "text-decoration-line-through"}`}>{el.title}</p>
-                  <button id={el.id} priority={el.priority} title={el.title} className="btn p-0 border-0 update-todo" onClick={handleShowNotif}>
+                  <p className={`p-0 m-0 me-3 ${parseInt(el.is_active) === 1 ? "" : "text-decoration-line-through"}`} data-cy="todo-item-title">
+                    {el.title}
+                  </p>
+                  <button id={el.id} priority={el.priority} title={el.title} className="btn p-0 border-0 update-todo" onClick={handleShowNotif} data-cy="todo-item-edit-button">
                     <img src={PencilIcon} alt="" />
                   </button>
                 </div>
-                <button title={el.title} id={el.id} className="btn p-0 border-0" onClick={handleShowNotif2}>
+                <button title={el.title} id={el.id} className="btn p-0 border-0" onClick={handleShowNotif2} data-cy="todo-item-delete-button">
                   <img src={TrashIcon} alt="" />
                 </button>
               </div>
@@ -238,14 +248,14 @@ export default function ActivityDetail() {
         return result;
       } else {
         return (
-          <div class="text-center">
+          <div className="text-center" data-cy="todo-empty-state">
             <img src={ImgDetail} alt="Hero Image" className="img-fluid mt-5" />
           </div>
         );
       }
     } else {
       return (
-        <div class="lds-ring">
+        <div className="lds-ring">
           <div></div>
           <div></div>
           <div></div>
@@ -369,60 +379,62 @@ export default function ActivityDetail() {
   return (
     <section className="activity-detail">
       <Header />
-      <div class="container">
-        <div class="subjudul d-flex justify-content-between align-items-center mb-5">
-          <div class="judul-activity d-flex align-items-center">
-            <Button type="link" href="/" className="btn p-0 me-3 border-0">
+      <div className="container">
+        <div className="subjudul d-flex justify-content-between align-items-center mb-5">
+          <div className="judul-activity d-flex align-items-center">
+            <Button type="link" href="/" className="btn p-0 me-3 border-0" data-cy="todo-back-button">
               <img src={BackIcon} alt="" />
             </Button>
-            <div class="form-update">
+            <div className="form-update">
               {isLoadingActivity === true ? (
-                <span class="lds-dual-ring cyan"></span>
+                <span className="lds-dual-ring cyan"></span>
               ) : (
                 <>
-                  <p className={`p-0 m-0 ${isActive === "form" ? "d-none" : ""}`}>{valueName}</p>
+                  <p className={`p-0 m-0 ${isActive === "form" ? "d-none" : ""}`} data-cy="todo-title">
+                    {valueName}
+                  </p>
                   <input className={`${isActive === "form" ? "" : "d-none"} name-activity`} type="text" defaultValue={valueName} onChange={(e) => setValueName(e.target.value)} onBlur={hiddenForm} />
                 </>
               )}
             </div>
 
-            <Button className="btn p-0 ms-2 border-0 pencil-update" onClick={updateNewJudul}>
+            <Button className="btn p-0 ms-2 border-0 pencil-update" onClick={updateNewJudul} data-cy="todo-title-edit-button">
               <img src={PencilIcon} alt="" />
             </Button>
           </div>
           <div className="position-relative">
-            <Button className="btn p-0 me-3 border-0" onClick={handleShowFilter}>
+            <Button className="btn p-0 me-3 border-0" onClick={handleShowFilter} data-cy="todo-sort-button">
               <img src={UrutkanIcon} alt="" />
             </Button>
-            <div class={`filter-container d-flex flex-column align-items-start ${showFilter}`}>
-              <button className="btn p-0 me-3 border-0 active" onClick={sortByTerbaru}>
+            <div className={`filter-container d-flex flex-column align-items-start ${showFilter}`}>
+              <button className="btn p-0 me-3 border-0 active" onClick={sortByTerbaru} data-cy="sort-selection">
                 <img src="/icon/terbaru.png" alt="" />
                 <span>Terbaru</span>
               </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByTerlama}>
+              <button className="btn p-0 me-3 border-0 " onClick={sortByTerlama} data-cy="sort-selection">
                 <img src="/icon/terlama.png" alt="" />
                 <span>Terlama</span>
               </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByAZ}>
+              <button className="btn p-0 me-3 border-0 " onClick={sortByAZ} data-cy="sort-selection">
                 <img src="/icon/a-z.png" alt="" />
                 <span>A-Z</span>
               </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByZA}>
+              <button className="btn p-0 me-3 border-0 " onClick={sortByZA} data-cy="sort-selection">
                 <img src="/icon/z-a.png" alt="" />
                 <span>Z-A</span>
               </button>
-              <button className="btn p-0 me-3 border-0 " onClick={sortByNotYet}>
+              <button className="btn p-0 me-3 border-0 " onClick={sortByNotYet} data-cy="sort-selection">
                 <img src="/icon/notyet.png" alt="" />
                 <span>Belum Selesai</span>
               </button>
             </div>
-            <button className="rounded-pill btn-cyan" onClick={handleShowNotif}>
+            <button className="rounded-pill btn-cyan" onClick={handleShowNotif} data-cy="todo-add-button">
               + Tambah
             </button>
           </div>
         </div>
         {checkTodoArray()}
-        <ModalElement show={show} size="lg" funcModal={handleCloseNotif} heading="Ubah List Item" isHeader isFooter isSpinner={isSpinner} funcSave={createToDo}>
+        <ModalElement show={show} data-cy="modal-add" size="lg" funcModal={handleCloseNotif} heading="Ubah List Item" isHeader isFooter isSpinner={isSpinner} funcSave={createToDo}>
           <label htmlFor="add-todo" className="fw-bold mb-2">
             NAMA LIST ITEM
           </label>
@@ -437,30 +449,32 @@ export default function ActivityDetail() {
             placeholder={divCircleColorOption(selectedOption.value, "", true)}
           />
         </ModalElement>
-        <ModalElement show={show2} size="md">
-          <div class="text-center p-4">
-            <img src={WarningIcon} alt="" className="mb-5" />
-            <p className="fs-5 mb-5">
+        <ModalElement show={show2} size="md" data-cy="modal-delete">
+          <div className="text-center p-4">
+            <img src={WarningIcon} alt="" className="mb-5" data-cy="modal-delete-icon" />
+            <p className="fs-5 mb-5" data-cy="modal-delete-title">
               Apakah kamu yakin akan menghapus List Item <strong>"{nameToDo}"</strong>?
             </p>
-            <div class="d-flex justify-content-center">
-              <Button isPrimary isGray className="rounded-pill me-3" onClick={handleCloseNotif2}>
+            <div className="d-flex justify-content-center">
+              <Button isPrimary isGray className="rounded-pill me-3" onClick={handleCloseNotif2} data-cy="modal-delete-cancel-button">
                 Batal
               </Button>
-              <Button isPrimary isRed className="rounded-pill" onClick={deleteToDo}>
+              <Button isPrimary isRed className="rounded-pill" onClick={deleteToDo} data-cy="modal-delete-confirm-button">
                 <span>Hapus</span>
-                {isSpinnerDelete === true ? <span class="lds-dual-ring"></span> : ""}
+                {isSpinnerDelete === true ? <span className="lds-dual-ring"></span> : ""}
               </Button>
             </div>
           </div>
         </ModalElement>
-        <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish}>
-          <div class="row px-4 align-items-center">
-            <div class="col-auto">
-              <img src={AlertIcon} alt="" />
+        <ModalElement show={showFinish} size="md" funcModal={handleCloseFinish} data-cy="modal-information">
+          <div className="row px-4 align-items-center">
+            <div className="col-auto">
+              <img src={AlertIcon} alt="" data-cy="modal-information-icon" />
             </div>
-            <div class="col">
-              <p className="fs-5 m-0">Item telah terhapus</p>
+            <div className="col">
+              <p className="fs-5 m-0" data-cy="modal-information-title">
+                Item telah terhapus
+              </p>
             </div>
           </div>
         </ModalElement>

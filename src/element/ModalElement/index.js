@@ -19,10 +19,10 @@ export default function ModalElement(props) {
 
       {isFooter ? (
         <Modal.Footer>
-          <div class="text-end">
+          <div className="text-end">
             <Button isPrimary className="rounded-pill d-inline-flex align-items-center" onClick={props.funcSave}>
               <span>Simpan</span>
-              {props.isSpinner === true ? <span class="lds-dual-ring"></span> : ""}
+              {props.isSpinner === true ? <span className="lds-dual-ring"></span> : ""}
             </Button>
           </div>
         </Modal.Footer>
