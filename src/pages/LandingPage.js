@@ -33,7 +33,7 @@ export default function LandingPage() {
   const getDataActivityArray = () => {
     Axios({
       method: "GET",
-      url: "https://floating-mountain-35184.herokuapp.com/activity-groups?email=muhadiyaksa@gmail.com",
+      url: "https://todo.api.devcode.gethired.id/activity-groups?email=muhadiyaksa@gmail.com",
     }).then((res) => {
       if (res.data.status === "Success") {
         // let data = res.data.data.filter((el) => el.email === "muhadiyaksa@gmail.com");
@@ -89,7 +89,7 @@ export default function LandingPage() {
         title: "New Activity",
         email: "muhadiyaksa@gmail.com",
       },
-      url: "https://floating-mountain-35184.herokuapp.com/activity-groups",
+      url: "https://todo.api.devcode.gethired.id/activity-groups",
     }).then(() => {
       getDataActivityArray();
     });
@@ -99,7 +99,7 @@ export default function LandingPage() {
     setIsSpinnerDelete(true);
     Axios({
       method: "DELETE",
-      url: `https://floating-mountain-35184.herokuapp.com/activity-groups/${idActivity}`,
+      url: `https://todo.api.devcode.gethired.id/activity-groups/${idActivity}`,
     }).then((res) => {
       if (res.data.status === "Success") {
         let data = activityArray.filter((el) => el.id !== parseInt(idActivity));

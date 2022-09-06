@@ -87,7 +87,7 @@ export default function ActivityDetail() {
   const getDataActivity = () => {
     Axios({
       method: "GET",
-      url: `https://floating-mountain-35184.herokuapp.com/activity-groups/${param.id}`,
+      url: `https://todo.api.devcode.gethired.id/activity-groups/${param.id}`,
     }).then((res) => {
       if (res.data.status === "Success") {
         setValueName(res.data.data.title);
@@ -99,7 +99,7 @@ export default function ActivityDetail() {
   const getDataAllToDo = () => {
     Axios({
       method: "GET",
-      url: `https://floating-mountain-35184.herokuapp.com/todo-items?activity_group_id=${param.id}`,
+      url: `https://todo.api.devcode.gethired.id/todo-items?activity_group_id=${param.id}`,
     }).then((res) => {
       if (res.data.status === "Success") {
         settodoArray(res.data.data);
@@ -120,7 +120,7 @@ export default function ActivityDetail() {
           title: nameToDo,
           priority: selectedOption.value,
         },
-        url: `https://floating-mountain-35184.herokuapp.com/todo-items/${idToDo}`,
+        url: `https://todo.api.devcode.gethired.id/todo-items/${idToDo}`,
       }).then((res) => {
         getDataAllToDo();
 
@@ -134,7 +134,7 @@ export default function ActivityDetail() {
           title: nameToDo,
           priority: selectedOption.value,
         },
-        url: "https://floating-mountain-35184.herokuapp.com/todo-items",
+        url: "https://todo.api.devcode.gethired.id/todo-items",
       }).then((res) => {
         if (res.data.status === "Success") {
           getDataAllToDo();
@@ -192,7 +192,7 @@ export default function ActivityDetail() {
       data: {
         is_active: e.target.checked === true ? "0" : "1",
       },
-      url: `https://floating-mountain-35184.herokuapp.com/todo-items/${e.target.getAttribute("idtodo")}`,
+      url: `https://todo.api.devcode.gethired.id/todo-items/${e.target.getAttribute("idtodo")}`,
     }).then((res) => {
       console.log(res);
     });
@@ -271,7 +271,7 @@ export default function ActivityDetail() {
       data: {
         title: valueName,
       },
-      url: `https://floating-mountain-35184.herokuapp.com/activity-groups/${param.id}`,
+      url: `https://todo.api.devcode.gethired.id/activity-groups/${param.id}`,
     }).then((res) => {
       console.log(res);
     });
@@ -281,7 +281,7 @@ export default function ActivityDetail() {
     setIsSpinerDelete(true);
     Axios({
       method: "DELETE",
-      url: `https://floating-mountain-35184.herokuapp.com/todo-items/${idToDo}`,
+      url: `https://todo.api.devcode.gethired.id/todo-items/${idToDo}`,
     }).then((res) => {
       if (res.data.status === "Success") {
         let data = todoArray.filter((el) => el.id !== parseInt(idToDo));
