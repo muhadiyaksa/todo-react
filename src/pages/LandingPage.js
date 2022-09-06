@@ -33,11 +33,11 @@ export default function LandingPage() {
   const getDataActivityArray = () => {
     Axios({
       method: "GET",
-      url: "https://floating-mountain-35184.herokuapp.com/activity-groups",
+      url: "https://floating-mountain-35184.herokuapp.com/activity-groups?email=muhadiyaksa@gmail.com",
     }).then((res) => {
       if (res.data.status === "Success") {
-        let data = res.data.data.filter((el) => el.email === "muhadiyaksa@gmail.com");
-        setActivityArray(data);
+        // let data = res.data.data.filter((el) => el.email === "muhadiyaksa@gmail.com");
+        setActivityArray(res.data.data);
         setIsLoading(false);
         setIsSpinner(false);
       }
